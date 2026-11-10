@@ -6,8 +6,8 @@
  * Do not change the provided function names or parameter lists.
  * You may add helper functions if needed.
  *
- * Student Name:
- * Student Number:
+ * Student Name: Fawaz Shariff
+ * Student Number: A01443086
  */
 
 #include <stdio.h>
