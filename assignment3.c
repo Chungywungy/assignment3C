@@ -27,8 +27,9 @@ struct record {
 /* Task 1: Validate a Student ID */
 int isValidID(const char *id)
 {
-    /* TODO: Return 1 if id starts with 'a' and has exactly 8 digits.
-       Return 0 otherwise. */
+    if (id[0] == 'a' &&  strlen(id) == 8) {
+        return 1;
+    }
     return 0;
 }
 
