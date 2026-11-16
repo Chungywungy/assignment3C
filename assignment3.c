@@ -95,15 +95,8 @@ int readStudent(record *student)
 /* Task 3: Display All Student Records */
 void displayRecords(const record records[], size_t count)
 {
-    /* TODO: Print records to stderr, one per line, in the format:
-       <record number> <ID> <score>
-       Record numbering starts at 1. Print nothing if count is 0. */
-    if (count != 0) {
-        printf("Records:\n");
-        for (size_t i = 0; i < count; i++) {
-            record record = records[i];
-            fprintf(stderr, "%ld %s %d\n", i + 1 , record.id, record.score);
-        }
+    for (size_t i = 0; i < count; i++) {
+        fprintf(stderr, "%zu %s %d\n", i + 1, records[i].id, records[i].score);
     }
 }
 
