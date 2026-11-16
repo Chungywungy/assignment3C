@@ -131,12 +131,13 @@ int idSorter(const void *a, const void *b) {
 /* Task 6: Append a Student Record */
 void appendRecord(record records[], size_t *count, size_t capacity)
 {
-    /* TODO: Read a new student and append only if input succeeds.
-       Do not write past capacity. */
-    int new_student = readStudent(records);
-
-    if (new_student == 0 && *count < capacity) {
-        strcpy(records[*count].id, records[new_student].id);
+    if (*count >= capacity) {
+        return;
+    }
+    record temp;
+    if (readStudent(&temp) == 1) { // struct assignment copies id and score
+        records[*count] = temp;
+        (*count)++;
     }
 }
 
