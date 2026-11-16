@@ -111,7 +111,7 @@ int scoreSorter(const void *a, const void *b) {
     record *p = (record *)a;
     record *q = (record *)b;
 
-    return p->score > q-> score;
+    return (p->score > q-> score) - (p->score < q-> score);
 }
 
 /* Task 5: Sort Records by Student Number */
@@ -125,7 +125,7 @@ int idSorter(const void *a, const void *b) {
     record *p = (record *)a;
     record *q = (record *)b;
 
-    return p->id > q-> id;
+    return strcmp(p->id, q->id);
 }
 
 /* Task 6: Append a Student Record */
