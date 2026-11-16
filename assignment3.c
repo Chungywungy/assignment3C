@@ -25,6 +25,9 @@ struct record {
     int score;
 };
 
+int scoreSorter(const void *a, const void *b);
+int idSorter(const void *a, const void *b);
+
 /* Task 1: Validate a Student ID */
 int isValidID(const char *id)
 {
@@ -78,12 +81,28 @@ void displayRecords(const record records[], size_t count)
 void sortByScore(record records[], size_t count)
 {
     /* TODO: Sort the existing records by score in ascending order. */
+    void qsort(records, count, sizeof(record), scoreSorter);
+}
+
+int scoreSorter(const void *a, const void *b) {
+    record *p = (record *)a;
+    record *q = (record *)b;
+
+    return p->score > q-> score;
 }
 
 /* Task 5: Sort Records by Student Number */
 void sortByStudentNumber(record records[], size_t count)
 {
     /* TODO: Sort the existing records by student ID in ascending order. */
+    void qsort(records, count, sizeof(record), idSorter);
+}
+
+int idSorter(const void *a, const void *b) {
+    record *p = (record *)a;
+    record *q = (record *)b;
+
+    return p->id > q-> id;
 }
 
 /* Task 6: Append a Student Record */
