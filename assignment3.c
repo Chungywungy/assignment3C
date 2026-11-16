@@ -46,15 +46,23 @@ int readStudent(record *student)
        - Return 1 on success and 0 if the operation is cancelled.
        - Use only the first word of each input line.
        - Print prompts to stdout. */
-    printf("Enter student ID: ");
-    scanf("%s", student->id);
-    if (isValidID(student->id) || student->id[0] == '\0' || student->id[0] == -1) {
-        int score;
-        printf("Enter student score: ");
-        scanf("%d", &score);
-        if (score >= 0 && score <= 100 || score == '\0' || score == -1) {
-            student->score = score;
-            return 1;
+    char line[INPUT_SIZE];
+    char word[INPUT_SIZE];
+
+    while (1) {
+        printf("Enter student id: ");
+        if (fgets(line, sizeof(line), stdin) == NULL) {
+            return 0;
+        }
+        if (sscanf(line, "%127s", word) != 1) {
+            continue;
+        }
+        if (strcmp(word, "-1") == 0) {
+            return 0;
+        }
+        if (isValidID(word)) {
+            strcpy(student->id, word);
+            break;
         }
     }
     return 0;
@@ -111,8 +119,7 @@ void appendRecord(record records[], size_t *count, size_t capacity)
     int new_student = readStudent(records);
 
     if (new_student == 0 && *count < capacity) {
-        record.id = records[*count].id;
-        record.score = records[*count].score;
+        strcpy(records[*count].id, records[new_student].id);
     }
 }
 
@@ -129,8 +136,7 @@ void modifyRecord(record records[], size_t count, size_t recordNumber)
             records[recordNumber].score);
         int student = readStudent(&records[i]);
         if (student == 0) {
-            records[recordNumber].id = records[i].id;
-            records[recordNumber].score = records[i].score;
+            strcpy(records[recordNumber].id, records[i].id);
         }
     }
 }
@@ -143,15 +149,12 @@ int main(void)
     int command;
 
     while (1) {
-        /* TODO: Print a command prompt to stdout. */
         fprintf(stdout, "Enter command: ");
 
         if (fgets(input, sizeof(input), stdin) == NULL) {
             break;  /* EOF exits the program. */
         }
 
-        /* TODO: Read ONLY the first word and convert it to an integer.
-        command = 0;  /* Replace with parsed command. */
         command = atoi(&input[0]);
 
         if (command == -4) {
