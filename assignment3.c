@@ -13,8 +13,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <ctype.h>
-#include <stdbool.h>
 
 #define MAX_RECORDS 1000
 #define INPUT_SIZE 128
@@ -81,7 +79,7 @@ void displayRecords(const record records[], size_t count)
 void sortByScore(record records[], size_t count)
 {
     /* TODO: Sort the existing records by score in ascending order. */
-    void qsort(records, count, sizeof(record), scoreSorter);
+    qsort(records, count, sizeof(record), scoreSorter);
 }
 
 int scoreSorter(const void *a, const void *b) {
@@ -95,7 +93,7 @@ int scoreSorter(const void *a, const void *b) {
 void sortByStudentNumber(record records[], size_t count)
 {
     /* TODO: Sort the existing records by student ID in ascending order. */
-    void qsort(records, count, sizeof(record), idSorter);
+    qsort(records, count, sizeof(record), idSorter);
 }
 
 int idSorter(const void *a, const void *b) {
