@@ -14,6 +14,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <ctype.h>
+#include <stdbool.h>
 
 #define MAX_RECORDS 1000
 #define INPUT_SIZE 128
@@ -44,6 +45,17 @@ int readStudent(record *student)
        - Return 1 on success and 0 if the operation is cancelled.
        - Use only the first word of each input line.
        - Print prompts to stdout. */
+    printf("Enter student ID: ");
+    scanf("%s", student->id);
+    if (isValidID(student->id) || student->id[0] == '\0' || student->id[0] == -1) {
+        int score;
+        printf("Enter student score: ");
+        scanf("%d", &score);
+        if (score >= 0 && score <= 100 || score == '\0' || score == -1) {
+            student->score = score;
+            return 1;
+        }
+    }
     return 0;
 }
 
