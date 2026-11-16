@@ -146,14 +146,15 @@ int main(void)
 
     while (1) {
         /* TODO: Print a command prompt to stdout. */
+        fprintf(stdout, "Enter command: ");
 
         if (fgets(input, sizeof(input), stdin) == NULL) {
             break;  /* EOF exits the program. */
         }
 
         /* TODO: Read ONLY the first word and convert it to an integer.
-           Ignore invalid commands without printing an error. */
         command = 0;  /* Replace with parsed command. */
+        command = atoi(&input[0]);
 
         if (command == -4) {
             break;
