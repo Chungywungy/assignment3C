@@ -48,9 +48,29 @@ int readStudent(record *student)
        - Print prompts to stdout. */
     char line[INPUT_SIZE];
     char word[INPUT_SIZE];
+    record temp;
 
+    // Prompt for ID until EOF, valid, or -1
     while (1) {
         printf("Enter student id: ");
+        if (fgets(line, sizeof(line), stdin) == NULL) {
+            return 0; // EOF
+        }
+        if (sscanf(line, "%127s", word) != 1) {
+            continue; // Blank
+        }
+        if (strcmp(word, "-1") == 0) {
+            return 0; // Cancel prompt
+        }
+        if (isValidID(word)) {
+            strcpy(temp.id, word);
+            break; // Valid
+        }
+    }
+
+    // Prompt for score until EOF, 0-100, or -1
+    while (1) {
+        printf("Enter student score: ");
         if (fgets(line, sizeof(line), stdin) == NULL) {
             return 0;
         }
@@ -60,12 +80,16 @@ int readStudent(record *student)
         if (strcmp(word, "-1") == 0) {
             return 0;
         }
-        if (isValidID(word)) {
-            strcpy(student->id, word);
+        char *end;
+        long value = strtol(word, &end, 10);
+        if (*end != '\0' && value >= 0 && value <= 100) {
+            temp.score = (int)value;
             break;
         }
     }
-    return 0;
+
+    *student = temp;
+    return 1;
 }
 
 /* Task 3: Display All Student Records */
