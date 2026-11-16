@@ -144,18 +144,16 @@ void appendRecord(record records[], size_t *count, size_t capacity)
 /* Task 7: Modify an Existing Record */
 void modifyRecord(record records[], size_t count, size_t recordNumber)
 {
-    /* TODO:
-       - Ignore an out-of-range record number.
-       - Display the current record number, ID, and score to stderr.
-       - Read replacement data and overwrite ONLY if input succeeds.
-       Record numbers start at 1, array indices at 0. */
-    for (size_t i = 0; i < count; i++) {
-        fprintf(stderr, "Modifying record %ld %d %d\n", recordNumber, *records[recordNumber].id,
-            records[recordNumber].score);
-        int student = readStudent(&records[i]);
-        if (student == 0) {
-            strcpy(records[recordNumber].id, records[i].id);
-        }
+   if (recordNumber < 1 || recordNumber > count) {
+       return; // Out of range
+   }
+    size_t index = recordNumber - 1;
+
+    fprintf(stderr, "%zu %s %d\n", recordNumber, records[index].id, records[index].score);
+
+    record temp;
+    if (readStudent(&temp) == 1) {
+        records[index] = temp;
     }
 }
 
