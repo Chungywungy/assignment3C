@@ -29,7 +29,7 @@ int idSorter(const void *a, const void *b);
 /* Task 1: Validate a Student ID */
 int isValidID(const char *id)
 {
-    if (id[0] == 'a' &&  strlen(id) == 8) {
+    if (id[0] == 'a' &&  strlen(id) == 9) {
         return 1;
     }
     return 0;
@@ -38,14 +38,6 @@ int isValidID(const char *id)
 /* Task 2: Read One Student Record */
 int readStudent(record *student)
 {
-    /* TODO:
-       - Prompt for an ID until it is valid, EOF, or -1.
-       - Prompt for a score until it is an integer from 0 to 100,
-         EOF, or -1.
-       - Only update *student after BOTH fields are valid.
-       - Return 1 on success and 0 if the operation is cancelled.
-       - Use only the first word of each input line.
-       - Print prompts to stdout. */
     char line[INPUT_SIZE];
     char word[INPUT_SIZE];
     record temp;
@@ -103,7 +95,6 @@ void displayRecords(const record records[], size_t count)
 /* Task 4: Sort Records by Score */
 void sortByScore(record records[], size_t count)
 {
-    /* TODO: Sort the existing records by score in ascending order. */
     qsort(records, count, sizeof(record), scoreSorter);
 }
 
@@ -117,7 +108,6 @@ int scoreSorter(const void *a, const void *b) {
 /* Task 5: Sort Records by Student Number */
 void sortByStudentNumber(record records[], size_t count)
 {
-    /* TODO: Sort the existing records by student ID in ascending order. */
     qsort(records, count, sizeof(record), idSorter);
 }
 
@@ -162,7 +152,6 @@ int main(void)
     record records[MAX_RECORDS];
     size_t count = 0;
     char input[INPUT_SIZE];
-    int command;
 
     while (1) {
         fprintf(stdout, "Enter command: ");
@@ -171,7 +160,7 @@ int main(void)
             break;  /* EOF exits the program. */
         }
 
-        command = atoi(&input[0]);
+        int command = atoi(&input[0]);
 
         if (command == -4) {
             break;
