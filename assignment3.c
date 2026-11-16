@@ -126,6 +126,15 @@ void modifyRecord(record records[], size_t count, size_t recordNumber)
        - Display the current record number, ID, and score to stderr.
        - Read replacement data and overwrite ONLY if input succeeds.
        Record numbers start at 1, array indices at 0. */
+    for (size_t i = 0; i < count; i++) {
+        fprintf(stderr, "Modifying record %ld %d %d\n", recordNumber, *records[recordNumber].id,
+            records[recordNumber].score);
+        int student = readStudent(&records[i]);
+        if (student == 0) {
+            records[recordNumber].id = records[i].id;
+            records[recordNumber].score = records[i].score;
+        }
+    }
 }
 
 int main(void)
