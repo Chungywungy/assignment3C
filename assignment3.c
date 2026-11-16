@@ -74,7 +74,7 @@ int readStudent(record *student)
         }
         char *end;
         long value = strtol(word, &end, 10);
-        if (*end != '\0' && value >= 0 && value <= 100) {
+        if (*end == '\0' && value >= 0 && value <= 100) {
             temp.score = (int)value;
             break;
         }
