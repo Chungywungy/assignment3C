@@ -110,6 +110,12 @@ void appendRecord(record records[], size_t *count, size_t capacity)
 {
     /* TODO: Read a new student and append only if input succeeds.
        Do not write past capacity. */
+    int new_student = readStudent(records);
+
+    if (new_student == 0 && *count < capacity) {
+        record.id = records[*count].id;
+        record.score = records[*count].score;
+    }
 }
 
 /* Task 7: Modify an Existing Record */
